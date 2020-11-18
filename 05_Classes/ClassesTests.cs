@@ -33,6 +33,8 @@ namespace _05_Classes
                 Make = "Honda",
                 Model = "Civic"
             };
+
+            int x = 4;
         }
     }
 }
