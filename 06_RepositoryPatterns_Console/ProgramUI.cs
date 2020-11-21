@@ -85,47 +85,55 @@ namespace _06_RepositoryPatterns_Console
             Console.WriteLine("Enter the title for the content:");
             newContent.Title = Console.ReadLine();
 
-            //Description
-            Console.WriteLine("Enter the description for the content:");
-            newContent.Description = Console.ReadLine();
-
-            //Maturity Rating
-            Console.WriteLine("Enter the rating for the content (G, PG, PG-13, etc): ");
-            newContent.MaturityRating = Console.ReadLine();
-
-            //Star Rating
-            Console.WriteLine("Enter the star count for the content (5.8, 10, 1.5, etc):");
-            string starsAsString = Console.ReadLine();
-            newContent.StarRating = double.Parse(starsAsString);
-
-            //IsFamilyFriendly
-            Console.WriteLine("Is this content family friendly? (y/n)");
-            string familyFriendlyString = Console.ReadLine().ToLower();
-
-            if (familyFriendlyString == "y")
+            if (_contentRepo.GetContentByTitle(newContent.Title) == null)
             {
-                newContent.IsFamilyFriendly = true;
+
+                //Description
+                Console.WriteLine("Enter the description for the content:");
+                newContent.Description = Console.ReadLine();
+
+                //Maturity Rating
+                Console.WriteLine("Enter the rating for the content (G, PG, PG-13, etc): ");
+                newContent.MaturityRating = Console.ReadLine();
+
+                //Star Rating
+                Console.WriteLine("Enter the star count for the content (5.8, 10, 1.5, etc):");
+                string starsAsString = Console.ReadLine();
+                newContent.StarRating = double.Parse(starsAsString);
+
+                //IsFamilyFriendly
+                Console.WriteLine("Is this content family friendly? (y/n)");
+                string familyFriendlyString = Console.ReadLine().ToLower();
+
+                if (familyFriendlyString == "y")
+                {
+                    newContent.IsFamilyFriendly = true;
+                }
+                else
+                {
+                    newContent.IsFamilyFriendly = false;
+                }
+
+                //GenreType
+                Console.WriteLine("Enter the Genre Number:\n" +
+                    "1. Horror\n" +
+                    "2. Romcom\n" +
+                    "3. SciFi\n" +
+                    "4. Documentary\n" +
+                    "5. Bromance\n" +
+                    "6. Drama\n" +
+                    "7. Action");
+
+                string genreAsString = Console.ReadLine();
+                int genreAsInt = int.Parse(genreAsString);
+                newContent.TypeOfGenre = (GenreType)genreAsInt;
+
+                _contentRepo.AddContentToList(newContent);
             }
             else
             {
-                newContent.IsFamilyFriendly = false;
+                Console.WriteLine("This title was already taken");
             }
-
-            //GenreType
-            Console.WriteLine("Enter the Genre Number:\n" +
-                "1. Horror\n" +
-                "2. Romcom\n" +
-                "3. SciFi\n" +
-                "4. Documentary\n" +
-                "5. Bromance\n" +
-                "6. Drama\n" +
-                "7. Action");
-
-            string genreAsString = Console.ReadLine();
-            int genreAsInt = int.Parse(genreAsString);
-            newContent.TypeOfGenre = (GenreType)genreAsInt;
-
-            _contentRepo.AddContentToList(newContent);
         }
 
         // View Current StreamingContent that is saved
@@ -155,7 +163,7 @@ namespace _06_RepositoryPatterns_Console
             StreamingContent content = _contentRepo.GetContentByTitle(title);
 
             // Display said content if it isnt null
-            if(content != null)
+            if (content != null)
             {
                 Console.WriteLine($"Title: {content.Title}\n" +
                     $"Description: {content.Description}\n" +
@@ -233,7 +241,7 @@ namespace _06_RepositoryPatterns_Console
             // Verify the update worked
             bool wasUpdated = _contentRepo.UpdateExistingContent(oldTitle, newContent);
 
-            if(wasUpdated)
+            if (wasUpdated)
             {
                 Console.WriteLine("Content successfully updated.");
             }

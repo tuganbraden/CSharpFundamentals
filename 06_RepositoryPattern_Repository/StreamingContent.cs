@@ -18,6 +18,7 @@ namespace _06_RepositoryPattern_Repository
     }
 
     //Plain old c# object -- POCO
+    //This is our poco. this will serve as our base object that we will be adding to a list in our repo
     public class StreamingContent
     {
         public string Title { get; set; }
