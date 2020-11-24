@@ -196,7 +196,8 @@ namespace _06_RepositoryPatterns_Console
 
             //Title
             Console.WriteLine("Enter the title for the content:");
-            newContent.Title = Console.ReadLine();
+            string newTitle = Console.ReadLine();
+
 
             //Description
             Console.WriteLine("Enter the description for the content:");
@@ -274,6 +275,7 @@ namespace _06_RepositoryPatterns_Console
                 Console.WriteLine("\nThe content could not be deleted.");
             }
         }
+
 
         //Seed method
         private void SeedContentList()

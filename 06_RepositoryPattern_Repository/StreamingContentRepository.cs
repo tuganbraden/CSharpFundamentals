@@ -28,7 +28,7 @@ namespace _06_RepositoryPattern_Repository
         {
             //Find the content
             StreamingContent oldContent = GetContentByTitle(originalTitle);
-
+            
             //Update the content
             if(oldContent != null)
             {
@@ -80,6 +80,12 @@ namespace _06_RepositoryPattern_Repository
             }
 
             return null;
+        }
+
+        //checking if an update for info is empty
+        private string ifEmpty(string newProperty, string oldProperty)
+        {
+            return newProperty == "" ? oldProperty : newProperty;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace _06_RepositoryPattern_Repository
     public enum GenreType
     {
         Horror = 1,
-        Romcom,
+        RomCom,
         SciFi,
         Documentary,
         Bromance,
